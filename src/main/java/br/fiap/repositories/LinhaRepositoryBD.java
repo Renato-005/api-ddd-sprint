@@ -63,7 +63,7 @@ public class LinhaRepositoryBD {
     }
 
     public List<Linha> getAll() {
-        String sql = "SELECT * FROM T_SVIA_LINHA";
+        String sql = "SELECT * FROM T_SVIA_LINHA WHERE deleted = 0";
         List<Linha> linhas = new ArrayList<>();
         try (PreparedStatement ps = connection.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
@@ -87,7 +87,7 @@ public class LinhaRepositoryBD {
     }
 
     public Optional<Linha> getById(int id) {
-        String sql = "SELECT * FROM T_SVIA_LINHA WHERE id_linha = ?";
+        String sql = "SELECT * FROM T_SVIA_LINHA WHERE id_linha = ? AND deleted = 0";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
